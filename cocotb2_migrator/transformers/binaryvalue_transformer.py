@@ -1,6 +1,6 @@
 import libcst as cst
 from libcst import Attribute, Name, Arg
-from transformers.base import BaseCocotbTransformer
+from cocotb2_migrator.transformers.base import BaseCocotbTransformer
 
 
 class BinaryValueTransformer(BaseCocotbTransformer):

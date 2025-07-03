@@ -1,5 +1,5 @@
 from libcst import parse_module
-from transformers.binaryvalue_transformer import BinaryValueTransformer
+from cocotb2_migrator.transformers.binaryvalue_transformer import BinaryValueTransformer
 
 def test_binaryvalue_module_path_update():
     source = "val = cocotb.binary.BinaryValue('1010')"

@@ -1,6 +1,6 @@
 import libcst as cst
 from libcst import Call, Attribute, Name
-from transformers.base import BaseCocotbTransformer
+from cocotb2_migrator.transformers.base import BaseCocotbTransformer
 
 
 class ForkTransformer(BaseCocotbTransformer):

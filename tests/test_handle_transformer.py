@@ -1,5 +1,5 @@
 from libcst import parse_module
-from transformers.handle_transformer import HandleTransformer
+from cocotb2_migrator.transformers.handle_transformer import HandleTransformer
 
 def test_get_value_removed():
     source = "val = sig.value.get_value()"

@@ -1,5 +1,5 @@
 from libcst import parse_module
-from transformers.coroutine_transformer import CoroutineToAsyncTransformer
+from cocotb2_migrator.transformers.coroutine_transformer import CoroutineToAsyncTransformer
 
 def test_coroutine_to_async_transform():
     source = '''

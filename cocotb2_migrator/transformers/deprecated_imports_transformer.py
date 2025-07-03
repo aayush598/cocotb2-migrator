@@ -1,6 +1,6 @@
 import libcst as cst
 from libcst import ImportFrom, ImportAlias, Name, Attribute
-from transformers.base import BaseCocotbTransformer
+from cocotb2_migrator.transformers.base import BaseCocotbTransformer
 
 
 class DeprecatedImportsTransformer(BaseCocotbTransformer):

@@ -1,5 +1,5 @@
 from libcst import parse_module
-from transformers.fork_transformer import ForkTransformer
+from cocotb2_migrator.transformers.fork_transformer import ForkTransformer
 
 def test_fork_to_start_soon():
     source = "cocotb.fork(my_task())"

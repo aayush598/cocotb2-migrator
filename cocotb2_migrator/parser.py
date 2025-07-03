@@ -56,16 +56,16 @@ def save_file(file_path: str, content: str):
     with open(file_path, 'w', encoding='utf-8') as f:
         f.write(content)
 
-
 def parse_and_transform_file(
     file_path: str,
     transformers: List[Type[CSTTransformer]],
     in_place: bool = False,
     show_diff: bool = True
-):
+) -> Tuple[Optional[str], List[str]]:
     """
     Parses and applies transformers to the file at `file_path`.
     If `in_place` is True, updates the file with transformed code.
+    Returns the transformed code and list of applied transformers.
     """
     source = load_file(file_path)
     pipeline = TransformerPipeline(transformers)
@@ -73,7 +73,7 @@ def parse_and_transform_file(
 
     if not applied_transformers:
         console.print(f"[yellow]No transformations applied to [bold]{file_path}[/bold][/yellow]")
-        return
+        return None, []
 
     if show_diff:
         console.rule(f"[bold cyan]Transformations applied: {', '.join(applied_transformers)}")
@@ -84,3 +84,5 @@ def parse_and_transform_file(
         console.print(f"[green]Updated [bold]{file_path}[/bold] with transformations.[/green]")
     else:
         console.print(f"[blue]Preview only. Use '--in-place' to write changes to file.[/blue]")
+
+    return transformed_code, applied_transformers

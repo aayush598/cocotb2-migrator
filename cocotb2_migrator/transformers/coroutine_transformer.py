@@ -1,5 +1,5 @@
 import libcst as cst
-from transformers.base import BaseCocotbTransformer
+from cocotb2_migrator.transformers.base import BaseCocotbTransformer
 
 
 class CoroutineToAsyncTransformer(BaseCocotbTransformer):

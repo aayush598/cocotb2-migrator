@@ -1,5 +1,5 @@
 from libcst import parse_module
-from transformers.deprecated_imports_transformer import DeprecatedImportsTransformer
+from cocotb2_migrator.transformers.deprecated_imports_transformer import DeprecatedImportsTransformer
 
 def test_decorators_import_migrated():
     src = "from cocotb.decorators import coroutine"
