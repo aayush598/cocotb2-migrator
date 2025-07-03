@@ -1,7 +1,7 @@
 [project]
 name = "cocotb2-migrator"
 version = "0.1.0"
-description = "Tool to migrate cocotb 1.x tests to async/await 2.x style"
+description = "Tool to migrate cocotb 1.x tests to cocotb 2.x style"
 readme = "README.md"
 authors = [{ name="Aayush Gid", email="aayushgid598@gmail.com" }]
 license = { text = "MIT" }
@@ -15,7 +15,7 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/aayush598/cocotb2-migrator.git"
+Homepage = "https://pypi.org/project/cocotb2-migrator/"
 Repository = "https://github.com/aayush598/cocotb2-migrator.git"
 
 [project.scripts]

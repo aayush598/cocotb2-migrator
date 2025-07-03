@@ -7,6 +7,7 @@ from cocotb2_migrator.transformers.fork_transformer import ForkTransformer
 from cocotb2_migrator.transformers.binaryvalue_transformer import BinaryValueTransformer
 from cocotb2_migrator.transformers.handle_transformer import HandleTransformer
 from cocotb2_migrator.transformers.deprecated_imports_transformer import DeprecatedImportsTransformer
+from cocotb2_migrator.transformers.join_transformer import JoinTransformer
 import os
 
 ALL_TRANSFORMERS = [
@@ -15,6 +16,7 @@ ALL_TRANSFORMERS = [
     BinaryValueTransformer,
     HandleTransformer,
     DeprecatedImportsTransformer,
+    JoinTransformer,
 ]
 
 def migrate_file(file_path: str, report: dict):
