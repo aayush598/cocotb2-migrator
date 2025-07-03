@@ -1,9 +1,6 @@
--e .
-
-libcst==1.8.2
-PyYAML==6.0.2
-termcolor==3.1.0
+build==1.2.2.post1
 click==8.2.1
+-e git+https://github.com/aayush598/cocotb2-migrator.git@678e4e72faeb19a722b223af42440afcd459b27b#egg=cocotb2_migrator
 iniconfig==2.1.0
 libcst==1.8.2
 markdown-it-py==3.0.0
@@ -11,6 +8,7 @@ mdurl==0.1.2
 packaging==25.0
 pluggy==1.6.0
 Pygments==2.19.2
+pyproject_hooks==1.2.0
 pytest==8.4.1
 PyYAML==6.0.2
 rich==14.0.0

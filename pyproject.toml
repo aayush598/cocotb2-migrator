@@ -1,0 +1,26 @@
+[project]
+name = "cocotb2-migrator"
+version = "0.1.0"
+description = "Tool to migrate cocotb 1.x tests to async/await 2.x style"
+readme = "README.md"
+authors = [{ name="Aayush Gid", email="aayushgid598@gmail.com" }]
+license = { text = "MIT" }
+requires-python = ">=3.8"
+
+dependencies = [
+  "libcst",
+  "click",
+  "termcolor",
+  "rich"
+]
+
+[project.urls]
+Homepage = "https://github.com/aayush598/cocotb2-migrator.git"
+Repository = "https://github.com/aayush598/cocotb2-migrator.git"
+
+[project.scripts]
+cocotb2-migrator = "cocotb2_migrator.main:main"  # CLI entry point
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
