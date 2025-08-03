@@ -11,7 +11,7 @@ cocotb2-migrator automates the migration of cocotb testbenches from version 1.x 
 - **Coroutine to Async/Await**: Converts `@cocotb.coroutine` decorated functions to `async def`
 - **Fork to Start Soon**: Transforms `cocotb.fork()` calls to `cocotb.start_soon()`
 - **Handle Access Modernization**: Updates deprecated handle value access patterns
-- **Binary Value Updates**: Migrates `cocotb.binary.BinaryValue` to `cocotb.BinaryValue`
+- **Binary Value Updates**: Migrates `BinaryValue` to `LogicArray` with appropriate method calls
 - **Clock Transformations**: Updates Clock API usage and removes deprecated parameters
 - **Environment Variables**: Updates deprecated environment variable names to cocotb 2.x conventions
 - **Join Operations**: Simplifies Join operations for direct awaiting
@@ -123,21 +123,82 @@ raw_val = dut.signal.value
 
 ### 4. Binary Value Updates
 
-Updates binary value imports and usage:
+Transforms `BinaryValue` usage to `LogicArray` with appropriate constructor methods:
 
 **Before:**
 ```python
-from cocotb.binary import BinaryValue
-val = cocotb.binary.BinaryValue(0)
-val = BinaryValue(value=0, bigEndian=True)
+# Basic string conversion
+val = BinaryValue('1010')
+
+# Integer with bit width
+val = BinaryValue(42, 8)
+
+# Signed representation
+val = BinaryValue(42, 8, binaryRepresentation=BinaryRepresentation.SIGNED)
+
+# Bytes with endianness
+val = BinaryValue(b"\xAA", bigEndian=True)
+val = BinaryValue(b"\xBB", bigEndian=False)
+
+# String treated as bytes with endianness
+val = BinaryValue('1010', bigEndian=True)
+
+# Property access
+x = val.integer
+y = val.signed_integer
+z = val.binstr
+w = val.buff
 ```
 
 **After:**
 ```python
-from cocotb import BinaryValue
-val = cocotb.BinaryValue(0)
-val = BinaryValue(value=0, big_endian=True)
+# Basic string conversion
+val = LogicArray('1010')
+
+# Integer with bit width
+val = LogicArray.from_unsigned(42, 8)
+
+# Signed representation
+val = LogicArray.from_signed(42, 8)
+
+# Bytes with endianness
+val = LogicArray.from_bytes(b"\xAA", byteorder="big")
+val = LogicArray.from_bytes(b"\xBB", byteorder="little")
+
+# String treated as bytes with endianness
+val = LogicArray.from_bytes('1010', byteorder="big")
+
+# Property access
+x = val.to_unsigned()
+y = val.to_signed()
+z = str(val)
+w = val.to_bytes(byteorder="big")
 ```
+
+**Import transformations:**
+```python
+# Before
+from cocotb.binary import BinaryValue
+
+# After
+from cocotb.types import LogicArray
+```
+
+**Module path transformations:**
+```python
+# Before
+val = cocotb.binary.BinaryValue('1010')
+val = cocotb.BinaryValue('1010')
+
+# After
+val = cocotb.types.LogicArray('1010')
+val = LogicArray('1010')  # If LogicArray is imported
+```
+
+**Special cases handled:**
+- **SIGNED_MAGNITUDE representation**: Creates a basic LogicArray with warning comment (no direct equivalent in LogicArray)
+- **Complex constructor patterns**: Automatically determines the appropriate `from_*` method based on argument types
+- **Endianness handling**: Converts `bigEndian=True/False` to `byteorder="big"/"little"`
 
 ### 5. Clock API Updates
 
@@ -266,7 +327,7 @@ All transformers inherit from `BaseCocotbTransformer` and implement specific mig
 - **`CoroutineToAsyncTransformer`**: Handles `@cocotb.coroutine` → `async def`
 - **`ForkTransformer`**: Converts `cocotb.fork()` → `cocotb.start_soon()`
 - **`HandleTransformer`**: Updates signal value access patterns
-- **`BinaryValueTransformer`**: Migrates binary value usage
+- **`BinaryValueTransformer`**: Migrates `BinaryValue` to `LogicArray` with appropriate methods
 - **`ClockTransformer`**: Updates Clock API usage and parameters
 - **`EnvironmentTransformer`**: Updates environment variable names
 - **`JoinTransformer`**: Simplifies Join operations
@@ -341,7 +402,7 @@ cocotb2_migrator/
     ├── coroutine_transformer.py    # Coroutine → async/await
     ├── fork_transformer.py         # Fork → start_soon
     ├── handle_transformer.py       # Handle access patterns
-    ├── binaryvalue_transformer.py  # BinaryValue updates
+    ├── binaryvalue_transformer.py  # BinaryValue → LogicArray
     ├── clock_transformer.py        # Clock API updates
     ├── environment_transformer.py  # Environment variables
     ├── join_transformer.py         # Join operations
@@ -408,8 +469,9 @@ Some transformations require manual intervention after running the migrator:
 
 1. **Clock.frequency**: This attribute was removed in cocotb 2.x with no direct replacement
 2. **Task.has_started()**: This method was removed and needs manual handling
-3. **Complex environment variable usage**: Some complex patterns may need manual review
-4. **Custom coroutine patterns**: Advanced coroutine usage may need manual adjustment
+3. **SIGNED_MAGNITUDE representation**: Has no direct LogicArray equivalent - creates basic LogicArray with warning
+4. **Complex environment variable usage**: Some complex patterns may need manual review
+5. **Custom coroutine patterns**: Advanced coroutine usage may need manual adjustment
 
 ### Best Practices
 

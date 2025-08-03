@@ -1,1 +1,1 @@
-task.cancel()
+val = BinaryValue(42, 8, binaryRepresentation=BinaryRepresentation.SIGNED_MAGNITUDE)

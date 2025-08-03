@@ -39,8 +39,8 @@ r = sig.value
 
 # Old: x = cocotb.binary.BinaryValue(0)
 # Expected: x = cocotb.BinaryValue(0)
-x = cocotb.BinaryValue(0)
+x = LogicArray.from_unsigned(0)
 
 # Old: x = cocotb.BinaryValue(value=0, bigEndian=True)
 # Expected: x = cocotb.BinaryValue(value=0, big_endian=True)
-x = cocotb.BinaryValue(value=0, big_endian=True)
+x = LogicArray()
