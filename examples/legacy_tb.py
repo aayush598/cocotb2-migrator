@@ -1,1 +1,1 @@
-val = BinaryValue(42, 8, binaryRepresentation=BinaryRepresentation.SIGNED_MAGNITUDE)
+clk.start(cycles=10)
