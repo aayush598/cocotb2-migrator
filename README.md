@@ -213,6 +213,7 @@ clk.start(cycles=100)
 
 **After:**
 ```python
+# WARNING: Clock.start(cycles=...) was removed in cocotb 2.0 (manual fix required)
 clock = Clock(dut.clk, 10, unit="ns")
 clock.start()
 clk.start()
