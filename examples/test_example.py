@@ -22,8 +22,8 @@ cocotb.start_soon(my_task())
 i = int(sig.value)
 
 # Old: b = sig.value.binstr
-# Expected: b = format(sig.value, 'b')
-b = format(sig.value, 'b')
+# Expected: b = str(sig.value)
+b = str(sig.value)
 
 # ========================
 # BinaryValue Transformation
