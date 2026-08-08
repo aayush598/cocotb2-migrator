@@ -114,7 +114,7 @@ binary_str = dut.signal.value.binstr
 **After:**
 ```python
 integer_val = int(dut.signal.value)
-binary_str = format(dut.signal.value, 'b')
+binary_str = str(dut.signal.value)
 ```
 
 ### 4. Binary Value Updates

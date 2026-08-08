@@ -7,9 +7,9 @@ def test_integer_to_int():
     mod = parse_module(source).visit(HandleTransformer())
     assert mod.code.strip() == expected
 
-def test_binstr_to_format():
+def test_binstr_to_str():
     source = "b = sig.value.binstr"
-    expected = "b = format(sig.value, 'b')"
+    expected = "b = str(sig.value)"
     mod = parse_module(source).visit(HandleTransformer())
     assert mod.code.strip() == expected
 
