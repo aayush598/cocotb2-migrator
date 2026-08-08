@@ -5,7 +5,9 @@ from cocotb2_migrator.report import MigrationReport
 from cocotb2_migrator.transformers.binaryvalue_transformer import BinaryValueTransformer
 from cocotb2_migrator.transformers.clock_transformer import ClockTransformer
 from cocotb2_migrator.transformers.coroutine_transformer import CoroutineToAsyncTransformer
+from cocotb2_migrator.transformers.decorators_transformer import DecoratorsTransformer
 from cocotb2_migrator.transformers.deprecated_imports_transformer import DeprecatedImportsTransformer
+from cocotb2_migrator.transformers.result_transformer import ResultTransformer
 from cocotb2_migrator.transformers.environment_transformer import EnvironmentTransformer
 from cocotb2_migrator.transformers.fork_transformer import ForkTransformer
 from cocotb2_migrator.transformers.handle_transformer import HandleTransformer
@@ -18,6 +20,8 @@ ALL_TRANSFORMERS = [
     BinaryValueTransformer,
     ClockTransformer,
     CoroutineToAsyncTransformer,
+    DecoratorsTransformer,
+    ResultTransformer,
     DeprecatedImportsTransformer,
     EnvironmentTransformer,
     ForkTransformer,

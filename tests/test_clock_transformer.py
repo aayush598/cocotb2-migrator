@@ -17,7 +17,10 @@ def test_rename_units_to_unit():
 
 def test_remove_cycles_argument():
     src = "clk.start(cycles=10)"
-    expected = "clk.start()"
+    expected = (
+        "# WARNING: Clock.start(cycles=...) was removed in cocotb 2.0 "
+        "(manual fix required)\nclk.start()"
+    )
     assert transform_code(src) == expected
 
 
@@ -41,7 +44,10 @@ def test_non_matching_start_soon_left_unchanged():
 
 def test_remove_frequency_attribute():
     src = "clk.frequency"
-    expected = '"# Clock.frequency was removed - manual intervention needed"'
+    expected = (
+        "# WARNING: Clock.frequency was removed in cocotb 2.0 "
+        "(manual fix required)\nclk.frequency"
+    )
     assert transform_code(src) == expected
 
 
