@@ -10,3 +10,7 @@ def main():
         report.save(args.report)
     else:
         report.print()
+
+
+if __name__ == "__main__":
+    main()
