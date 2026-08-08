@@ -107,18 +107,14 @@ Modernizes signal value access patterns:
 
 **Before:**
 ```python
-val = dut.signal.value.get_value()
 integer_val = dut.signal.value.integer
 binary_str = dut.signal.value.binstr
-raw_val = dut.signal.value.raw_value
 ```
 
 **After:**
 ```python
-val = dut.signal.value
 integer_val = int(dut.signal.value)
 binary_str = format(dut.signal.value, 'b')
-raw_val = dut.signal.value
 ```
 
 ### 4. Binary Value Updates
